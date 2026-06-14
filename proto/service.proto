@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package go_date_web_app.v1;
+
+option java_package = "com.lw_idp.go_date_web_app.v1";
+option java_multiple_files = true;
+
+service DomainService {
+  // Returns the current date and time
+  rpc GetCurrentDate (GetCurrentDateRequest) returns (GetCurrentDateResponse);
+}
+
+message GetCurrentDateRequest {}
+
+message GetCurrentDateResponse {
+  string date        = 1; // e.g. "2024-06-15"
+  string time        = 2; // e.g. "14:30:05"
+  string day_of_week = 3; // e.g. "Saturday"
+  string timezone    = 4; // e.g. "UTC"
+  string iso8601     = 5; // e.g. "2024-06-15T14:30:05Z"
+}

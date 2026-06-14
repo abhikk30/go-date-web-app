@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-date-web-app
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels: { app: go-date-web-app }
+  template:
+    metadata:
+      labels: { app: go-date-web-app }
+    spec:
+      containers:
+        - name: go-date-web-app
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet: { path: /readyz, port: 8080 }
+          livenessProbe:
+            httpGet: { path: /healthz, port: 8080 }
