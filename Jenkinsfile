@@ -40,6 +40,9 @@ spec:
               --destination=${REGISTRY}/${IMAGE_REPO}:${GIT_COMMIT} \
               --insecure --skip-tls-verify
           '''
+          sh '''
+            echo "Hello"
+          '''
         }
       }
     }
