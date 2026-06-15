@@ -14,3 +14,4 @@ COPY --from=build /app/package.json ./package.json
 EXPOSE 8080
 # tsconfig rootDir is ".", so src/index.ts compiles to dist/src/index.js.
 CMD ["dist/src/index.js"]
+##
