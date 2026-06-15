@@ -3,10 +3,18 @@
 // health/metrics endpoints are fixed skeleton output.
 import Fastify from "fastify";
 import { healthz, metrics, readyz } from "./handlers.js";
+import { handleDatePage } from "./service/handler.js";
 
 const PORT = 8080;
 
 const app = Fastify({ logger: true });
+
+app.get("/", async (req, reply) => {
+  const tz = (req.query as Record<string, string>)?.timezone;
+  const result = handleDatePage({ timezone: tz });
+  reply.status(result.status).header("content-type", "text/html; charset=utf-8");
+  return result.html;
+});
 
 app.get("/healthz", async () => healthz());
 app.get("/readyz", async () => readyz());
