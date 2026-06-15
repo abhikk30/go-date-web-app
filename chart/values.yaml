@@ -1,5 +1,5 @@
 image:
-  repository: kind-registry:5000/lw-idp/go-date-web-app
+  repository: localhost:5001/lw-idp/go-date-web-app
   tag: "latest" # Jenkins rewrites this line on every build
 replicaCount: 2
 service:
