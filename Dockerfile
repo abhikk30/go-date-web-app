@@ -2,9 +2,9 @@
 FROM node:22-bookworm-slim AS build
 WORKDIR /app
 COPY package.json tsconfig.json ./
-RUN corepack enable && pnpm install --prod=false
+RUN corepack enable && pnpm install
 COPY . .
-RUN pnpm build
+RUN pnpm build && pnpm prune --prod
 
 FROM gcr.io/distroless/nodejs22-debian12 AS runtime
 WORKDIR /app

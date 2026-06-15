@@ -10,8 +10,8 @@ const PORT = 8080;
 const app = Fastify({ logger: true });
 
 app.get("/", async (req, reply) => {
-  const tz = (req.query as Record<string, string>)?.timezone;
-  const result = handleDatePage({ timezone: tz });
+  const query = req.query as Record<string, string | undefined>;
+  const result = handleDatePage({ timezone: query.timezone });
   reply.status(result.status).header("content-type", "text/html; charset=utf-8");
   return result.html;
 });
